@@ -1,0 +1,6 @@
+name: central-finite-curve-dragoons
+
+plugins:
+  - name: vyper
+  - name: foundry
+  - name: etherscan
