@@ -1,13 +1,13 @@
 "use client";
 import { WagmiProvider, createConfig } from "wagmi";
-import { anvil, foundry } from "wagmi/chains";
+import { anvil } from "wagmi/chains";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ConnectKitProvider, getDefaultConfig } from "connectkit";
 
 const config = createConfig(
   getDefaultConfig({
     // Chains
-    chains: [foundry, anvil],
+    chains: [anvil],
 
     // Required API Keys
     walletConnectProjectId:

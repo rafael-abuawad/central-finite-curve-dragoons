@@ -1,18 +1,8 @@
-import { cfcdContract } from "@/lib/api/contract";
-import { ConnectKitButton } from "connectkit";
-import { useReadContract } from "wagmi";
-import { Loading } from "./Loading";
+export type CannotClaimProps = {
+  maxBalance: string;
+};
 
-export const CannotClaim = () => {
-  const { data: maxBalance, isPending } = useReadContract({
-    ...cfcdContract,
-    functionName: "maxBalance",
-  });
-
-  if (isPending) {
-    return <Loading />;
-  }
-
+export const CannotClaim = ({ maxBalance }: CannotClaimProps) => {
   return (
     <>
       <main
@@ -28,10 +18,9 @@ export const CannotClaim = () => {
         <hgroup>
           <h2>🐉 Central Finite Curve Dragoons</h2>
           <p>
-            You have reached the limit of <mark>{maxBalance?.toString()}</mark>{" "}
-            tokens per holder.
+            You have reached the limit of <mark>{maxBalance}</mark> tokens per
+            holder.
           </p>
-          <ConnectKitButton />
         </hgroup>
       </main>
     </>

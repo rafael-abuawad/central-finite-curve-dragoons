@@ -4,6 +4,7 @@ import { useReadContract, useReadContracts } from "wagmi";
 import { Loading } from "./Loading";
 import { useEffect, useState } from "react";
 import { CannotClaim } from "./CannotClaim";
+import { Soldout } from "./Soldout";
 
 export interface NFTCardProps {
   address: `0x${string}`;
@@ -47,6 +48,10 @@ export const NFTCard = ({ address }: NFTCardProps) => {
       },
       {
         ...cfcdContract,
+        functionName: "maxSupply",
+      },
+      {
+        ...cfcdContract,
         functionName: "maxBalance",
       },
       {
@@ -60,7 +65,7 @@ export const NFTCard = ({ address }: NFTCardProps) => {
       },
     ],
   });
-  const [totalSupply, maxBalance, balance, symbol] = data || [];
+  const [totalSupply, maxSupply, maxBalance, balance, symbol] = data || [];
   const [nextTokenURI, setNextTokenURI] = useState(
     "https://ipfs.io/ipfs/QmYZkmSfbtzYKaZr2iNEjHz3vCWNpLscwkoXpaWiQiMTjJ?filename=0.png",
   );
@@ -81,21 +86,25 @@ export const NFTCard = ({ address }: NFTCardProps) => {
   }
 
   useEffect(() => {
-    if (totalSupply) {
+    if (totalSupply && totalSupply.result) {
       (async () => {
-        const tokenURI = `ipfs://QmWTPAEgGDhyP1VMNVv6V3tDpfyLxCD9bvdrh6ZXgLjEEj/${totalSupply.result?.toString()}`;
+        const tokenURI = `ipfs://QmWTPAEgGDhyP1VMNVv6V3tDpfyLxCD9bvdrh6ZXgLjEEj/${totalSupply.result.toString()}`;
         const data = await fetchCFCDMetadata(tokenURI);
         setNextTokenURI(data.image);
       })();
     }
   }, [totalSupply]);
 
-  if (isPending || isLoading) {
+  if (isLoading || isPending) {
     return <Loading />;
   }
 
   if (maxBalance?.result == balance?.result) {
-    return <CannotClaim />;
+    return <CannotClaim maxBalance={maxBalance?.result?.toString() || ""} />;
+  }
+
+  if (totalSupply?.result?.toString() == maxSupply?.result?.toString()) {
+    return <Soldout />;
   }
 
   return (

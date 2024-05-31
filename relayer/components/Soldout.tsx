@@ -1,4 +1,4 @@
-export const SoldOut = () => {
+export const Soldout = () => {
   return (
     <>
       <main
