@@ -1,9 +1,7 @@
 // Central Finite Curve Dragoons Contract Bytecode.
 // https://etherscan.io/address/#code
-const address = process.env.CFCD_CONTRACT_ADDRESS as `0x${string}`;
-
 export const cfcdContract = {
-  address,
+  address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
   abi: [
     {
       anonymous: false,
@@ -152,6 +150,10 @@ export const cfcdContract = {
         },
         {
           name: "max_supply_",
+          type: "uint256",
+        },
+        {
+          name: "max_balance_",
           type: "uint256",
         },
         {
@@ -364,6 +366,30 @@ export const cfcdContract = {
       type: "function",
     },
     {
+      inputs: [],
+      name: "maxSupply",
+      outputs: [
+        {
+          name: "",
+          type: "uint256",
+        },
+      ],
+      stateMutability: "view",
+      type: "function",
+    },
+    {
+      inputs: [],
+      name: "maxBalance",
+      outputs: [
+        {
+          name: "",
+          type: "uint256",
+        },
+      ],
+      stateMutability: "view",
+      type: "function",
+    },
+    {
       inputs: [
         {
           name: "index",
@@ -563,18 +589,6 @@ export const cfcdContract = {
         {
           name: "",
           type: "string",
-        },
-      ],
-      stateMutability: "view",
-      type: "function",
-    },
-    {
-      inputs: [],
-      name: "max_supply",
-      outputs: [
-        {
-          name: "",
-          type: "uint256",
         },
       ],
       stateMutability: "view",

@@ -144,14 +144,14 @@ symbol: public(immutable(String[5]))
 # token collection.
 # @notice See comment on lower case letters
 # above at `name`.
-max_supply: public(immutable(uint256))
+max_supply: immutable(uint256)
 
 
 # @dev Returns the maximum token
 # balance each owner (holder) can have.
 # @notice See comment on lower case letters
 # above at `name`.
-max_balance: public(immutable(uint256))
+max_balance: immutable(uint256)
 
 
 # @dev Stores the base URI for computing `tokenURI`.
@@ -318,7 +318,7 @@ def __init__(name_: String[29], symbol_: String[5], max_supply_: uint256, max_ba
            symbol of the token collection.
     @param max_supply_ The maximum supply represented as a uint256
            of the token collection.
-    @param max_supply_ The maximum balance represented as a uint256
+    @param max_balance_ The maximum balance represented as a uint256
            of each token holder in the collection.
     @param base_uri_ The maximum 80-character user-readable
            string base URI for computing `tokenURI`.
@@ -547,7 +547,7 @@ def tokenURI(token_id: uint256) -> String[512]:
     # If there is no token URI but a base URI,
     # concatenate the base URI and token ID.
     if (base_uri_length != empty(uint256)):
-        return concat(_BASE_URI, uint2str(token_id), ".json")
+        return concat(_BASE_URI, uint2str(token_id))
     else:
         return ""
 
@@ -560,6 +560,29 @@ def totalSupply() -> uint256:
     @return uint256 The 32-byte token supply.
     """
     return self._total_supply()
+
+
+@external
+@view
+def maxSupply() -> uint256:
+    """
+    @dev Returns the maximum supply of tokens
+         that can ever be in existence.
+    @return uint256 The 32-byte token maximum supply.
+    """
+    return max_supply
+
+
+@external
+@view
+def maxBalance() -> uint256:
+    """
+    @dev Returns the maximum supply of balance
+         each token holder can have.
+    @return uint256 The 32-byte token maximum inidivual
+            holder balance.
+    """
+    return max_balance
 
 
 @external

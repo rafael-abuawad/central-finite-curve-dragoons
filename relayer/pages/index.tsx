@@ -1,3 +1,5 @@
+import { Container } from "@/components/Container";
+import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { NFTCard } from "@/components/NFTCard";
 import { Web3Provider } from "@/components/Web3Provider";
@@ -10,17 +12,8 @@ export default function Home() {
         <Header>
           <ConnectKitButton />
         </Header>
-        <main
-          className="container"
-          style={{
-            width: "100%",
-            height: "90vh",
-            display: "grid",
-            placeItems: "center",
-          }}
-        >
-          <NFTCard />
-        </main>
+        <Container />
+        <Footer />
       </Web3Provider>
     </>
   );

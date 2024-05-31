@@ -1,21 +1,13 @@
-import { WagmiProvider, createConfig, http } from "wagmi";
-import { anvil, mainnet } from "wagmi/chains";
+"use client";
+import { WagmiProvider, createConfig } from "wagmi";
+import { anvil, foundry } from "wagmi/chains";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ConnectKitProvider, getDefaultConfig } from "connectkit";
 
 const config = createConfig(
   getDefaultConfig({
-    // Your dApps chains
-    chains: [anvil],
-    transports: {
-      [mainnet.id]: http("https://eth.llamarpc.com"),
-    },
-    // transports: {
-    //   // RPC URL for each chain
-    //   [mainnet.id]: http(
-    //     `https://eth-mainnet.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_ALCHEMY_ID}`,
-    //   ),
-    // },
+    // Chains
+    chains: [foundry, anvil],
 
     // Required API Keys
     walletConnectProjectId:
@@ -28,6 +20,7 @@ const config = createConfig(
     appDescription: "Central Finite Curve Dragoons NFTs",
     appUrl: "https://family.co", // your app's url
     appIcon: "https://family.co/logo.png", // your app's icon, no bigger than 1024x1024px (max. 1MB)
+    ssr: true,
   }),
 );
 

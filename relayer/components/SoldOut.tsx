@@ -1,6 +1,4 @@
-import { ConnectKitButton } from "connectkit";
-
-export const NoWallet = () => {
+export const SoldOut = () => {
   return (
     <>
       <main
@@ -15,8 +13,9 @@ export const NoWallet = () => {
       >
         <hgroup>
           <h2>🐉 Central Finite Curve Dragoons</h2>
-          <p>Connect your wallet to proceed to the application.</p>
-          <ConnectKitButton />
+          <p>
+            All elements of this collection have been minted, thak you so much!
+          </p>
         </hgroup>
       </main>
     </>

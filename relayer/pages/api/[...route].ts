@@ -26,6 +26,7 @@ async function mint(params: SafeMintParams) {
     args: [params.owner, TOKEN_URI],
   });
   const hash = await wallet.writeContract(request);
+  const tx = await client.waitForTransactionReceipt({ hash, confirmations: 2 });
   return hash;
 }
 

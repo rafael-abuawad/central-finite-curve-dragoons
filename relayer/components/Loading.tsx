@@ -1,6 +1,4 @@
-import { ConnectKitButton } from "connectkit";
-
-export const NoWallet = () => {
+export const Loading = () => {
   return (
     <>
       <main
@@ -13,11 +11,8 @@ export const NoWallet = () => {
           placeItems: "start",
         }}
       >
-        <hgroup>
-          <h2>🐉 Central Finite Curve Dragoons</h2>
-          <p>Connect your wallet to proceed to the application.</p>
-          <ConnectKitButton />
-        </hgroup>
+        <h3>Loading...</h3>
+        <progress></progress>
       </main>
     </>
   );
