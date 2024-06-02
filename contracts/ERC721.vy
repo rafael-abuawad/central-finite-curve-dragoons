@@ -3,7 +3,7 @@
 @title Modern and Gas-Efficient ERC-721 + EIP-4494 Implementation
 @custom:contract-name ERC721
 @license GNU Affero General Public License v3.0 only
-@author pcaversaccio
+@author pcaversaccio, rabuawad_
 @notice These functions implement the ERC-721
         standard interface:
         - https://eips.ethereum.org/EIPS/eip-721.
@@ -11,9 +11,10 @@
         been added for convenience:
         - `name` (`external` `view` function),
         - `symbol` (`external` `view` function),
-        - `max_supply` (`external` `view` function),
         - `tokenURI` (`external` `view` function),
         - `totalSupply` (`external` `view` function),
+        - `maxSupply` (`external` `view` function),
+        - `maxBalance` (`external` `view` function),
         - `tokenByIndex` (`external` `view` function),
         - `tokenOfOwnerByIndex` (`external` `view` function),
         - `burn` (`external` function),
@@ -651,7 +652,6 @@ def safe_mint(owner: address, uri: String[432]):
     # New tokens will be automatically assigned an incremental ID.
     # The first token ID will be zero.
     token_id: uint256 = self._counter
-    assert max_supply > token_id, "ERC721: maximum supply of tokens reached"
     self._counter = token_id + 1
     # Theoretically, the following line could overflow
     # if all 2**256 token IDs were minted. However,
@@ -860,6 +860,19 @@ def _meets_balance_limits(owner: address):
 
 @internal
 @view
+def _meets_maximum_supply_limit():
+    """
+    @dev Reverts if the `max_supply` has been reached.
+    @notice This check is performed after incrementing the
+            token counter, so we use `<=` to ensure accuracy.
+            When the counter equals `max_supply`, it means
+            the maximum supply has been reached.
+    """
+    assert self._counter <= max_supply, "ERC721: operation exceeds collection maximum supply"
+
+
+@internal
+@view
 def _exists(token_id: uint256) -> bool:
     """
     @dev Returns whether `token_id` exists.
@@ -948,6 +961,7 @@ def _safe_mint(owner: address, token_id: uint256, data: Bytes[1_024]):
            with no specified format that is sent
            to `owner`.
     """
+    self._meets_maximum_supply_limit()
     self._meets_balance_limits(owner)
     self._mint(owner, token_id)
     assert self._check_on_erc721_received(empty(address), owner, token_id, data), "ERC721: transfer to non-ERC721Receiver implementer"

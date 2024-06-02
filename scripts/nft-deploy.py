@@ -19,7 +19,9 @@ def cli():
     """
 
 
-@cli.command(cls=NetworkBoundCommand,)
+@cli.command(
+    cls=NetworkBoundCommand,
+)
 @network_option()
 def deploy(network):
     if ":foundry" in network:
@@ -35,5 +37,12 @@ def deploy(network):
 
     # deploying NFT
     project.ERC721.deploy(
-        NAME, SYMBOL, MAX_SUPPLY, MAX_BALANCE, BASE_URI, NAME_EIP712, VERSION_EIP712, sender=account
+        NAME,
+        SYMBOL,
+        MAX_SUPPLY,
+        MAX_BALANCE,
+        BASE_URI,
+        NAME_EIP712,
+        VERSION_EIP712,
+        sender=account,
     )
