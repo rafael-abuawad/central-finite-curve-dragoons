@@ -30,3 +30,12 @@ def cfcd_nft(project, deployer):
         version_eip712,
         sender=deployer,
     )
+
+
+@pytest.fixture(scope="session")
+def on_foundry(chain):
+    chains = [
+        1,  # Ethereum mainnet-fork
+        31337,  # Anvil
+    ]
+    return chain.chain_id in chains

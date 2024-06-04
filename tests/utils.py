@@ -1,7 +1,7 @@
 from typing import Tuple, List
 
 
-def split_addresses_in_half(addresses, extra_address=None) -> Tuple[List, List]:
+def split_addresses(addresses, extra_address=None) -> Tuple[List, List]:
     middle = len(addresses) // 2
     first_half = addresses[:middle]
     second_half = addresses[middle:]
@@ -19,3 +19,9 @@ def find_account_by_address(accounts, address):
         if account.address == address:
             return account
     return None
+
+
+def error_wrap(message: str, on_foundry: bool = False) -> str:
+    if on_foundry:
+        return f"revert: {message}"
+    return message
