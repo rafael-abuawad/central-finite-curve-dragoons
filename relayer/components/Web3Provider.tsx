@@ -18,8 +18,8 @@ const config = createConfig(
 
     // Optional App Info
     appDescription: "Central Finite Curve Dragoons NFTs",
-    appUrl: "https://family.co", // your app's url
-    appIcon: "https://family.co/logo.png", // your app's icon, no bigger than 1024x1024px (max. 1MB)
+    appUrl: "https://central-finite-curve-dragoons-4mm6-qv8qjk7um.vercel.app/", // your app's url
+    appIcon: "https://central-finite-curve-dragoons-4mm6-qv8qjk7um.vercel.app/images/dragon-face.webp", // your app's icon, no bigger than 1024x1024px (max. 1MB)
     ssr: true,
   }),
 );
