@@ -63,39 +63,54 @@ implements: ERC721
 # @dev We import and implement the `IERC721Metadata`
 # interface, which is written using standard Vyper
 # syntax.
-import interfaces.IERC721Metadata as IERC721Metadata
+interface IERC721Metadata:
+    def supportsInterface(interfaceId: bytes4) -> bool: view
+    def name() -> String[25]: view
+    def symbol() -> String[5]: view
+    def tokenURI(_tokenId: uint256) -> String[512]: view
 implements: IERC721Metadata
 
 
 # @dev We import and implement the `IERC721Enumerable`
 # interface, which is written using standard Vyper
 # syntax.
-import interfaces.IERC721Enumerable as IERC721Enumerable
+interface IERC721Enumerable:
+    def supportsInterface(interfaceId: bytes4) -> bool: view
+    def totalSupply() -> uint256: view
+    def tokenByIndex(_index: uint256) -> uint256: view
+    def tokenOfOwnerByIndex(_owner: address, _index: uint256) -> uint256: view
 implements: IERC721Enumerable
 
 
 # @dev We import and implement the `IERC721Permit`
 # interface, which is written using standard Vyper
 # syntax.
-import interfaces.IERC721Permit as IERC721Permit
+interface IERC721Permit:
+    def supportsInterface(interfaceId: bytes4) -> bool: view
+    def permit(spender: address, tokenId: uint256, deadline: uint256, v: uint8, r: bytes32, s: bytes32): nonpayable
+    def nonces(tokenId: uint256) -> uint256: view
+    def DOMAIN_SEPARATOR() -> bytes32: view
 implements: IERC721Permit
 
 
 # @dev We import and implement the `IERC4906` interface,
 # which is written using standard Vyper syntax.
-import interfaces.IERC4906 as IERC4906
+interface IERC4906:
+    def supportsInterface(interfaceId: bytes4) -> bool: view
 implements: IERC4906
 
 
 # @dev We import and implement the `IERC5267` interface,
 # which is written using standard Vyper syntax.
-from interfaces import IERC5267
+interface IERC5267:
+    def eip712Domain() -> (bytes1, String[50], String[20], uint256, address, bytes32, DynArray[uint256, 128]): view
 implements: IERC5267
 
 
 # @dev We import the `IERC721Receiver` interface, which
 # is written using standard Vyper syntax.
-import interfaces.IERC721Receiver as IERC721Receiver
+interface IERC721Receiver:
+    def onERC721Received(_operator: address, _from: address, _tokenId: uint256, _data: Bytes[1024]) -> bytes4: nonpayable
 
 
 # @dev Stores the ERC-165 interface identifier for each

@@ -3,14 +3,14 @@ import { handle } from "hono/vercel";
 import { zValidator } from "@hono/zod-validator";
 import { createPublicClient, createWalletClient, http } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
-import { fantomTestnet } from "viem/chains";
+import { fantom } from "viem/chains";
 
 import { cfcdContract } from "@/lib/api/contract";
 import { SafeMintParams } from "@/lib/api/types";
 import { PRIVATE_KEY, TOKEN_URI } from "@/lib/api/constants";
 import { SafeMintSchema } from "@/lib/api/schemas";
 
-const web3Config = { chain: fantomTestnet, transport: http() };
+const web3Config = { chain: fantom, transport: http() };
 const account = privateKeyToAccount(PRIVATE_KEY);
 const client = createPublicClient({ ...web3Config });
 const wallet = createWalletClient({ ...web3Config, account });
@@ -42,10 +42,18 @@ app.post("/claim", zValidator("json", SafeMintSchema), async (c) => {
   return c.json({ message: "NFT claimed", hash });
 });
 
-app.get("/details", (c) => {
+app.get("/details", async (c) => {
+  const name = await client.readContract({
+    ...cfcdContract,
+    functionName: 'name',
+  })
+  const symbol = await client.readContract({
+    ...cfcdContract,
+    functionName: 'symbol',
+  })
   return c.json({
-    title: "Central Finite Curve Dragoons Relayer",
-    version: "0.0.1",
+    name,
+    symbol
   });
 });
 

@@ -1,13 +1,13 @@
 "use client";
 import { WagmiProvider, createConfig } from "wagmi";
-import { fantom, fantomTestnet } from "wagmi/chains";
+import { fantom } from "wagmi/chains";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ConnectKitProvider, getDefaultConfig } from "connectkit";
 
 const config = createConfig(
   getDefaultConfig({
     // Chains
-    chains: [fantomTestnet],
+    chains: [fantom],
 
     // Required API Keys
     walletConnectProjectId:

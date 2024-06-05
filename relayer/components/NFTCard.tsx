@@ -1,6 +1,6 @@
 import { cfcdContract } from "@/lib/api/contract";
 import Image from "next/image";
-import { useReadContract, useReadContracts } from "wagmi";
+import { useReadContracts } from "wagmi";
 import { Loading } from "./Loading";
 import { useEffect, useState } from "react";
 import { CannotClaim } from "./CannotClaim";
