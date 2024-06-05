@@ -38,7 +38,9 @@ Our application consists of three main components:
 
 ## **Smart contracts**
 
-I decided to deploy the smart contract on Fantom, but if you want to can deploy it to any chain you want.
+I decided to deploy the smart contract on Fantom, but if you want to can deploy it to any chain you want. The contract is fully verifed.
+
+> [0xEae9c8cf4CF1fd673fd6dBfbd1A390Ee339473D6](https://ftmscan.com/address/0xEae9c8cf4CF1fd673fd6dBfbd1A390Ee339473D6)
 
 ## **Testing**
 
