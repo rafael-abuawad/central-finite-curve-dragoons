@@ -1,0 +1,47 @@
+specVersion: 1.0.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Modern and Gas-Efficient ERC-721 + EIP-4494 Implementation
+    network: fantom
+    source:
+      address: "0xEae9c8cf4CF1fd673fd6dBfbd1A390Ee339473D6"
+      abi: Modern and Gas-Efficient ERC-721 + EIP-4494 Implementation
+      startBlock: 82336119
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Transfer
+        - Approval
+        - ApprovalForAll
+        - MetadataUpdate
+        - BatchMetadataUpdate
+        - EIP712DomainChanged
+        - OwnershipTransferred
+        - RoleMinterChanged
+      abis:
+        - name: Modern and Gas-Efficient ERC-721 + EIP-4494 Implementation
+          file: ./abis/Modern and Gas-Efficient ERC-721 + EIP-4494 Implementation.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
+        - event: Approval(indexed address,indexed address,indexed uint256)
+          handler: handleApproval
+        - event: ApprovalForAll(indexed address,indexed address,bool)
+          handler: handleApprovalForAll
+        - event: MetadataUpdate(uint256)
+          handler: handleMetadataUpdate
+        - event: BatchMetadataUpdate(uint256,uint256)
+          handler: handleBatchMetadataUpdate
+        - event: EIP712DomainChanged()
+          handler: handleEIP712DomainChanged
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: RoleMinterChanged(indexed address,bool)
+          handler: handleRoleMinterChanged
+      file: ./src/modern-and-gas-efficient-erc-721-eip-4494-implementation.ts
