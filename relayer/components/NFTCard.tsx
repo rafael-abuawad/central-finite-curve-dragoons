@@ -40,7 +40,7 @@ async function fetchCFCDMetadata(endpoint: string): Promise<CFCDMetadata> {
 }
 
 export const NFTCard = ({ address }: NFTCardProps) => {
-  const { data, error, refetch, isPending } = useReadContracts({
+  const { data, refetch, isPending } = useReadContracts({
     contracts: [
       {
         ...cfcdContract,
