@@ -3,14 +3,14 @@ import { handle } from "hono/vercel";
 import { zValidator } from "@hono/zod-validator";
 import { createPublicClient, createWalletClient, http } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
-import { anvil } from "viem/chains";
+import { fantomTestnet } from "viem/chains";
 
 import { cfcdContract } from "@/lib/api/contract";
 import { SafeMintParams } from "@/lib/api/types";
 import { PRIVATE_KEY, TOKEN_URI } from "@/lib/api/constants";
 import { SafeMintSchema } from "@/lib/api/schemas";
 
-const web3Config = { chain: anvil, transport: http() };
+const web3Config = { chain: fantomTestnet, transport: http() };
 const account = privateKeyToAccount(PRIVATE_KEY);
 const client = createPublicClient({ ...web3Config });
 const wallet = createWalletClient({ ...web3Config, account });

@@ -1,4 +1,4 @@
-# pragma version ^0.3.10
+# pragma evm-version paris
 """
 @title EIP-4494 Interface Definition
 @custom:contract-name IERC721Permit

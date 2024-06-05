@@ -4,3 +4,11 @@ plugins:
   - name: vyper
   - name: foundry
   - name: etherscan
+  - name: fantom
+
+geth:
+  fantom:
+    opera:
+      uri: https://rpc2.fantom.network
+    testnet:
+      uri: https://fantom-testnet.drpc.org

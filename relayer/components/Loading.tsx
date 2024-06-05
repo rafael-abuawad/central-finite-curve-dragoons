@@ -1,4 +1,8 @@
-export const Loading = () => {
+export interface LoadingProps {
+  text?: string;
+}
+
+export const Loading = ({ text }: LoadingProps) => {
   return (
     <>
       <main
@@ -11,7 +15,8 @@ export const Loading = () => {
           placeItems: "start",
         }}
       >
-        <h3>Loading...</h3>
+        {text && <h3>{text}</h3>}
+        {!text && <h3>Loading...</h3>}
         <progress></progress>
       </main>
     </>

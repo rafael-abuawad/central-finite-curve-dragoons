@@ -6,7 +6,7 @@ NAME = "Central Finite Curve Dragoons"
 SYMBOL = "CFCD"
 MAX_SUPPLY = 128
 MAX_BALANCE = 3
-BASE_URI = "ipfs://QmT8XPukaF3pXCuFSeGjg7wuH1TXLvHFnNsYuMSudj9shn/"
+BASE_URI = "ipfs://QmPMc4tcBsMqLRuCQtPmPe84bpSjrC3Ky7t3JWuHXYB4aS/"
 NAME_EIP712 = "Central Finite Curve Dragoons"
 VERSION_EIP712 = "0.0.1"
 
@@ -31,9 +31,13 @@ def deploy(network):
     elif ":local:" in network:
         account = accounts.test_accounts[0]
 
-    elif ":mainnet:" in network:
+    elif ":mainnet:" in network or ":testnet:" in network:
         account = accounts.load("deployer")
         account.set_autosign(True)
+    
+    elif "fantom:" in network:
+        # account = accounts.load("cfcd-deployer")
+        account = accounts.load("deployer")
 
     # deploying NFT
     project.ERC721.deploy(

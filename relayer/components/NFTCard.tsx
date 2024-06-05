@@ -95,8 +95,12 @@ export const NFTCard = ({ address }: NFTCardProps) => {
     }
   }, [totalSupply]);
 
-  if (isLoading || isPending) {
+  if (isPending) {
     return <Loading />;
+  }
+
+  if (isLoading) {
+    return <Loading text="Claiming NFT..." />;
   }
 
   if (maxBalance?.result == balance?.result) {

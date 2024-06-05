@@ -15,7 +15,7 @@ export const Footer = () => {
           <h6>🐉 Central Finite Curve Dragoons</h6>
           <p>
             Created by{" "}
-            <a target="_blank" href="https://x.com/merklemaven">
+            <a target="_blank" href="https://x.com/rabuawad_">
               Rafael Abuawad
             </a>
           </p>

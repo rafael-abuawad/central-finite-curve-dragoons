@@ -1,7 +1,7 @@
 // Central Finite Curve Dragoons Contract Bytecode.
 // https://etherscan.io/address/#code
 export const cfcdContract = {
-  address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+  address: "0x4e37bc26d0F6C7C545756Ff961D934b805195C6e",
   abi: [
     {
       anonymous: false,

@@ -1,4 +1,4 @@
-# pragma version ^0.3.10
+# pragma evm-version paris
 """
 @title EIP-721 Optional Enumeration Interface Definition
 @custom:contract-name IERC721Enumerable
