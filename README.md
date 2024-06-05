@@ -42,6 +42,10 @@ I decided to deploy the smart contract on Fantom, but if you want to can deploy 
 
 > [0xEae9c8cf4CF1fd673fd6dBfbd1A390Ee339473D6](https://ftmscan.com/address/0xEae9c8cf4CF1fd673fd6dBfbd1A390Ee339473D6)
 
+Smart contract owner (the account that pays for all the mints)
+
+> [0x3af83e38de6ad6dd6c73696e050924a0eecdadef](https://ftmscan.com/address/0x3af83e38de6ad6dd6c73696e050924a0eecdadef)
+
 ## **Testing**
 
 The testing scripts are provided in the `tests` folder, specifically in the [test_nft.py](tests/test_nft.py) file. These tests cover various functionalities, including adding and minting, minting and transfering, etc.
