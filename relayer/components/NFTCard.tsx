@@ -5,6 +5,7 @@ import { Loading } from "./Loading";
 import { useEffect, useState } from "react";
 import { CannotClaim } from "./CannotClaim";
 import { Soldout } from "./Soldout";
+import { CollectedModal } from "./CollectedModal";
 
 export interface NFTCardProps {
   address: `0x${string}`;
@@ -70,19 +71,29 @@ export const NFTCard = ({ address }: NFTCardProps) => {
     "https://ipfs.io/ipfs/QmYZkmSfbtzYKaZr2iNEjHz3vCWNpLscwkoXpaWiQiMTjJ?filename=0.png",
   );
   const [isLoading, setIsLoading] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+  const [hash, setHash] = useState("");
 
   async function claimNFT(address: `0x${string}`) {
     setIsLoading(true);
-    await fetch("/api/claim", {
+    const res = await fetch("/api/claim", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ owner: address }),
-    }).finally(() => {
-      setIsLoading(false);
-      refetch();
-    });
+    })
+    const data = await res.json();
+    setOpenModal(true)
+    setHash(data.hash)
+
+    setIsLoading(false);
+    refetch();
+  }
+
+  function closeModal() {
+    setOpenModal(false)
+    setHash("")
   }
 
   useEffect(() => {
@@ -112,25 +123,29 @@ export const NFTCard = ({ address }: NFTCardProps) => {
   }
 
   return (
-    <article style={{ width: "100%", maxWidth: "550px" }}>
-      <header>
-        <strong>
-          🐲 {symbol?.result} #{totalSupply?.result?.toString()}
-        </strong>
-      </header>
-      <div>
-        <Image
-          src={nextTokenURI}
-          alt="Picture of the author"
-          width={514}
-          height={514}
-        />
-      </div>
-      <footer>
-        <button onClick={() => claimNFT(address)} style={{ width: "100%" }}>
-          Claim
-        </button>
-      </footer>
-    </article>
+    <>
+      <CollectedModal handleClick={closeModal} open={openModal} hash={hash} />
+      <article style={{ width: "100%", maxWidth: "550px" }}>
+        <header>
+          <strong>
+            🐲 {symbol?.result} #{totalSupply?.result?.toString()}
+          </strong>
+        </header>
+        <div>
+          <Image
+            src={nextTokenURI}
+            alt="Picture of the author"
+            width={514}
+            height={514}
+          />
+        </div>
+        <footer>
+          <button onClick={() => claimNFT(address)} style={{ width: "100%" }}>
+            Claim
+          </button>
+        </footer>
+      </article>
+    </>
   );
 };
+
