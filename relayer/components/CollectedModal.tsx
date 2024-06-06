@@ -9,7 +9,6 @@ export const CollectedModal = ({ open, hash, handleClick }: CollectedModalProps)
         <dialog open={open}>
             <article>
                 <header>
-                    <button aria-label="Close"></button>
                     <p>
                         <strong>🐲 Thank You for Minting!</strong>
                     </p>
